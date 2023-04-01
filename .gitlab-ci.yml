@@ -1,0 +1,56 @@
+# You can override the included template(s) by including variable overrides
+# SAST customization: https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
+# Secret Detection customization: https://docs.gitlab.com/ee/user/application_security/secret_detection/#customizing-settings
+# Dependency Scanning customization: https://docs.gitlab.com/ee/user/application_security/dependency_scanning/#customizing-the-dependency-scanning-settings
+# Note that environment variables can be set in several places
+# See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
+# stages:
+# - test
+# sast:
+#   stage: test
+# include:
+# - template: Security/SAST.gitlab-ci.yml
+
+variables:
+  publish_path: './build/$CI_PIPELINE_ID'
+  deploy_path: '/var/www'
+
+stages:
+  - build
+  - deploy
+
+build-staging:
+  variables:
+    REACT_APP_ENV: 'staging'
+    REACT_APP_API_URL: 'https://staging-api.hta-baemin.site'
+  stage: build
+  script:
+    - echo "SKIP_PREFLIGHT_CHECK=true" >> .env
+    - echo "BUILD_PATH='$publish_path/staging-admin.hta-baemin.site'" >> .env
+    - echo "REACT_APP_ENV=$REACT_APP_ENV" >> .env
+    - echo "REACT_APP_API_URL=$REACT_APP_API_URL" >> .env
+    - CI=false
+    - yarn
+    - yarn build
+  artifacts:
+    paths:
+      - $publish_path
+    expire_in: '1 hrs'
+  tags:
+    - frontend
+    - staging
+  only:
+    - staging
+
+deploy-staging:
+  stage: deploy
+  script:
+    - sudo cp -fRv $publish_path/staging-admin.hta-baemin.site $deploy_path
+  only:
+    - staging
+  tags:
+    - frontend
+    - staging
+  needs: [build-staging]
+  dependencies:
+    - build-staging
