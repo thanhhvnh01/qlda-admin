@@ -57,15 +57,8 @@ const Router = () => {
    */
   const FinalRoute = (props) => {
     const { route } = props;
-    if (
-      (!isCheckingRememberedUser && !isUserLoggedIn && route.meta === undefined) ||
-      (!isCheckingRememberedUser && !isUserLoggedIn && route.meta && !route.meta.authRoute && !route.meta.publicRoute)
-    ) {
-      return <Redirect to="/login" />;
-    }
-    if (route.meta && route.meta.authRoute && isUserLoggedIn) {
-      return <Redirect to="/categories" />;
-    }
+
+    // return <Redirect to="/categories" />;
 
     return <route.component {...props} />;
   };
