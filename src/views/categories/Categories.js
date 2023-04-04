@@ -29,8 +29,7 @@ import CategoryMoreActions from './CategoryMoreActions';
 
 const TABLE_HEAD = [
   { id: 'id', label: 'STT', align: 'center' },
-  { id: 'categoryNameEn', label: 'nameEn', align: 'left' },
-  { id: 'categoryNameRu', label: 'nameRu', align: 'left' },
+  { id: 'categoryNameEn', label: 'productType', align: 'left' },
   { id: 'status', label: 'status', align: 'left' },
   { id: 'more' },
 ];

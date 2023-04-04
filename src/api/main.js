@@ -1,5 +1,9 @@
 import axios, { handleRefreshToken } from './base';
 
+export const getProductsAPI = async () => {
+  return axios.get(`${process.env.REACT_APP_API_URL}/products`);
+};
+
 // -----------AUTHENTICATION APIS-----------
 export const refreshToken = async () => {
   return handleRefreshToken();
@@ -138,11 +142,6 @@ export const getEnabledColorsAPI = async () => {
 };
 
 // -----------PRODUCT APIS-----------
-export const getProductsAPI = async (pageSize, pageNumber, keyword = '') => {
-  return axios.get(
-    `${process.env.REACT_APP_API_URL}/products/admin?pageSize=${pageSize}&pageNumber=${pageNumber}&keyword=${keyword}`
-  );
-};
 
 export const setEnabledProductAPI = async (productGroupId, data) => {
   return axios.put(`${process.env.REACT_APP_API_URL}/products/${productGroupId}/set-enabled`, data);

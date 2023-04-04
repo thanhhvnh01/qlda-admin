@@ -39,11 +39,11 @@ const ImageUpload = ({
   const onUploadChange = async (e, setFile, setPhysicalFile, setPreviewFile) => {
     if (!!e.target.files[0]) {
       setFile(e.target.files[0]);
-      const res = await createPhysicalFileAPI({
-        fileName: e.target.files[0].name,
-        fileLength: e.target.files[0].size,
-      });
-      setPhysicalFile(res.data);
+      // const res = await createPhysicalFileAPI({
+      //   fileName: e.target.files[0].name,
+      //   fileLength: e.target.files[0].size,
+      // });
+      // setPhysicalFile(res.data);
 
       const reader = new FileReader();
       const files = e.target.files[0];
@@ -53,7 +53,7 @@ const ImageUpload = ({
       if (files) {
         reader.readAsDataURL(files);
       }
-      setImageId(res.data.physicalFileId);
+      // setImageId(res.data.physicalFileId);
     }
   };
 

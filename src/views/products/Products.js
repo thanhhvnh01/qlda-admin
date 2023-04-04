@@ -30,9 +30,7 @@ import ProductMoreActions from './ProductMoreActions';
 const TABLE_HEAD = [
   { id: 'id', label: 'STT', align: 'center' },
   { id: 'productNameEn', label: 'nameEn', align: 'left' },
-  { id: 'productNameRu', label: 'nameRu', align: 'left' },
   { id: 'productTypeName', label: 'productType', align: 'left' },
-  { id: 'numberOfColors', label: 'numberOfColors', align: 'left' },
   { id: 'status', label: 'status', align: 'left' },
   { id: 'more' },
 ];
@@ -53,12 +51,12 @@ const ProductGroups = ({ handleError403 }) => {
   const { enqueueSnackbar } = useSnackbar();
   const intl = useIntl();
 
-  const fetchData = async (pageSize, pageNumber, keyword) => {
+  const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await getProductsAPI(pageSize, pageNumber, keyword);
-      setData(response.data.pageData);
-      setTotalRows(response.data.paging.totalItem);
+      const response = await getProductsAPI();
+      setData(response.data);
+      setTotalRows(15);
     } catch (error) {
       enqueueSnackbar(<FormattedMessage id={getErrorMessage(error)} defaultMessage={getErrorMessage(error)} />, {
         variant: 'error',
@@ -69,7 +67,7 @@ const ProductGroups = ({ handleError403 }) => {
   };
 
   useEffect(() => {
-    fetchData(pageSize, pageNumber + 1, keyword);
+    fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refreshToggle, pageSize, pageNumber, keyword]);
 
@@ -186,37 +184,21 @@ const ProductGroups = ({ handleError403 }) => {
                         <TableCell align="left">
                           <Box>
                             <Typography variant="subtitle2" noWrap>
-                              {item.productNameEn}
+                              {item.productName}
                             </Typography>
                           </Box>
                         </TableCell>
+
                         <TableCell align="left">
                           <Box>
                             <Typography variant="subtitle3" noWrap>
-                              {item.productNameRu}
+                              {item.brand}
                             </Typography>
                           </Box>
                         </TableCell>
+
                         <TableCell align="left">
-                          <Box>
-                            <Typography variant="subtitle3" noWrap>
-                              {item.productTypeName}
-                            </Typography>
-                          </Box>
-                        </TableCell>
-                        <TableCell align="left">
-                          <Box>
-                            <Typography variant="subtitle3" noWrap>
-                              {item.numberOfColor}
-                            </Typography>
-                          </Box>
-                        </TableCell>
-                        <TableCell align="left">
-                          <Label color={item.isEnabled ? 'success' : 'error'}>
-                            {item.isEnabled
-                              ? intl.formatMessage({ id: 'label.active' })
-                              : intl.formatMessage({ id: 'label.inactive' })}
-                          </Label>
+                          <Label color={'success'}>{intl.formatMessage({ id: 'label.active' })}</Label>
                         </TableCell>
                         <TableCell align="right">
                           <ProductMoreActions

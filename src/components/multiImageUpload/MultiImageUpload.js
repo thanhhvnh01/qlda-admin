@@ -163,13 +163,6 @@ const MultiImageUpload = ({ file, setImageIds, images, setIsLoading, setToggle, 
         previewFile={image4}
         picture={`file${file}4`}
       />
-      <ImageUpload
-        setFile={setFile5}
-        setPhysicalFile={setPhysicalFile5}
-        setPreviewFile={setImage5}
-        previewFile={image5}
-        picture={`file${file}5`}
-      />
       <Box>
         <Button
           disabled={arrayIds.length === 5}

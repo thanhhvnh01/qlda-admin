@@ -258,7 +258,7 @@ const ProductEditModal = ({ open, close, product }) => {
   };
 
   return (
-    <CustomDialog fullWidth open={open} onClose={close} maxWidth="lg">
+    <CustomDialog fullWidth open={open} onClose={close} maxWidth="sm">
       <UILoader open={isLoading} />
       <DialogTitle>
         {!!product ? <FormattedMessage id="label.updateProduct" /> : <FormattedMessage id="label.createProduct" />}
@@ -279,31 +279,7 @@ const ProductEditModal = ({ open, close, product }) => {
                   }
                 />
               </Grid>
-              <Grid item md={6}>
-                <RHFTextField
-                  name="productGroupNameRu"
-                  size="small"
-                  label={
-                    <Box sx={{ display: 'flex' }}>
-                      <FormattedMessage id="label.nameRu" />
-                      <Box sx={{ color: theme.palette.error.main }}>&nbsp;*</Box>
-                    </Box>
-                  }
-                />
-              </Grid>
-              <Grid item md={6}>
-                <RHFSelect
-                  name="categoryId"
-                  size="small"
-                  label={
-                    <Box sx={{ display: 'flex' }}>
-                      <FormattedMessage id="label.category" />
-                      <Box sx={{ color: theme.palette.error.main }}>&nbsp;*</Box>
-                    </Box>
-                  }
-                  options={arrayToSelectOptions(categoryData, 'categoryName', 'categoryId')}
-                />
-              </Grid>
+
               <Grid item md={6}>
                 <RHFSelect
                   name="productTypeId"
@@ -317,158 +293,14 @@ const ProductEditModal = ({ open, close, product }) => {
                   options={arrayToSelectOptions(productTypeData, 'productTypeName', 'productTypeId')}
                 />
               </Grid>
-              <Grid item md={6}>
-                <RHFSelect
-                  name="materialTypeId"
-                  size="small"
-                  label={
-                    <Box sx={{ display: 'flex' }}>
-                      <FormattedMessage id="label.materialType" />
-                      <Box sx={{ color: theme.palette.error.main }}>&nbsp;*</Box>
-                    </Box>
-                  }
-                  options={enumToSelectOptions(MaterialTypeEnum)}
-                />
-              </Grid>
-              <Grid item md={6}>
-                <RHFSelect
-                  name="hairStyleId"
-                  size="small"
-                  label={
-                    <Box sx={{ display: 'flex' }}>
-                      <FormattedMessage id="label.hairStyle" />
-                      <Box sx={{ color: theme.palette.error.main }}>&nbsp;*</Box>
-                    </Box>
-                  }
-                  options={enumToSelectOptions(HairStyleEnum)}
-                  getOptionLabel={(option) => {
-                    return <FormattedMessage id={`enum.${HairStyleDisplayConfig[option.id]}`} />;
-                  }}
-                />
-              </Grid>
-              <Grid item md={4}>
-                <RHFSelect
-                  name="measureUnitLengthId"
-                  size="small"
-                  label={
-                    <Box sx={{ display: 'flex' }}>
-                      <FormattedMessage id="label.measureUnitLength" />
-                      <Box sx={{ color: theme.palette.error.main }}>&nbsp;*</Box>
-                    </Box>
-                  }
-                  options={enumToSelectOptions(LengthMeasureUnitEnum)}
-                  getOptionLabel={(option) => {
-                    return <FormattedMessage id={`enum.${LengthMeasureUnitDisplayConfig[option.id]}`} />;
-                  }}
-                />
-              </Grid>
-              <Grid item md={4}>
-                <RHFTextField
-                  name="fromLength"
-                  size="small"
-                  label={
-                    <Box sx={{ display: 'flex' }}>
-                      <FormattedMessage id="label.fromLength" />
-                      <Box sx={{ color: theme.palette.error.main }}>&nbsp;*</Box>
-                    </Box>
-                  }
-                />
-              </Grid>
-              <Grid item md={4}>
-                <RHFTextField
-                  name="toLength"
-                  size="small"
-                  label={
-                    <Box sx={{ display: 'flex' }}>
-                      <FormattedMessage id="label.toLength" />
-                      <Box sx={{ color: theme.palette.error.main }}>&nbsp;*</Box>
-                    </Box>
-                  }
-                />
-              </Grid>
-              <Grid item md={6}>
-                <RHFSelect
-                  name="measureUnitWeightId"
-                  size="small"
-                  label={
-                    <Box sx={{ display: 'flex' }}>
-                      <FormattedMessage id="label.measureUnitWeight" />
-                      <Box sx={{ color: theme.palette.error.main }}>&nbsp;*</Box>
-                    </Box>
-                  }
-                  options={enumToSelectOptions(WeightMeasureUnitEnum)}
-                />
-              </Grid>
-              <Grid item md={6}>
-                <RHFTextField
-                  name="weight"
-                  size="small"
-                  label={
-                    <Box sx={{ display: 'flex' }}>
-                      <FormattedMessage id="label.weight" />
-                      <Box sx={{ color: theme.palette.error.main }}>&nbsp;*</Box>
-                    </Box>
-                  }
-                />
-              </Grid>
-              <Grid item md={6}>
-                <RHFTextField
-                  name="origin"
-                  size="small"
-                  label={
-                    <Box sx={{ display: 'flex' }}>
-                      <FormattedMessage id="label.origin" />
-                      <Box sx={{ color: theme.palette.error.main }}>&nbsp;*</Box>
-                    </Box>
-                  }
-                />
-              </Grid>
-              <Grid item md={6}>
-                <RHFSelect
-                  name="packingRuleId"
-                  size="small"
-                  label={
-                    <Box sx={{ display: 'flex' }}>
-                      <FormattedMessage id="label.packingRule" />
-                      <Box sx={{ color: theme.palette.error.main }}>&nbsp;*</Box>
-                    </Box>
-                  }
-                  options={enumToSelectOptions(PackingRuleEnum)}
-                  getOptionLabel={(option) => {
-                    return <FormattedMessage id={`enum.${option.label}`} />;
-                  }}
-                />
-              </Grid>
-              <Grid item md={12}>
-                <RHFTextField
-                  name="videoUrl"
-                  size="small"
-                  label={
-                    <Box sx={{ display: 'flex' }}>
-                      <FormattedMessage id="label.videoUrl" />
-                      <Box sx={{ color: theme.palette.error.main }}>&nbsp;*</Box>
-                    </Box>
-                  }
-                />
-              </Grid>
             </Grid>
-            <Grid mt={2} container columns={12}>
+            <Grid container columns={12}>
               <Grid item md={6}>
-                <Button variant="contained" onClick={addColor}>
-                  <FormattedMessage id="button.createProduct" />
-                </Button>
-                <Box mt={2}>
+                <Box mt={1}>
                   {fields?.map((item, index) => {
                     return (
                       <Box key={item.id} display="flex" mt={3}>
                         <Box>
-                          <RHFSelect
-                            size="small"
-                            name={`colors.${index}.colorId`}
-                            label="Màu"
-                            options={arrayToSelectOptions(colorData, 'colorName', 'colorId')}
-                          />
-
                           <Controller
                             name={`colors.${index}.images`}
                             control={control}
@@ -492,48 +324,12 @@ const ProductEditModal = ({ open, close, product }) => {
                               name={`colors.${index}.isEnabled`}
                               label={<FormattedMessage id="label.isEnabled" />}
                             />
-                            <Button
-                              sx={{ width: '400px', display: 'flex', mr: 'auto', ml: 'auto' }}
-                              variant="outlined"
-                              color="error"
-                              onClick={() => {
-                                removeColor(index);
-                              }}
-                            >
-                              <FormattedMessage id="button.delete" />
-                            </Button>
                           </Stack>
                         </Box>
                       </Box>
                     );
                   })}
                 </Box>
-              </Grid>
-              <Grid item md={6}>
-                <Stack spacing={2.5}>
-                  <RHFTextField
-                    name="descriptionEn"
-                    size="small"
-                    multiline
-                    label={
-                      <Box sx={{ display: 'flex' }}>
-                        <FormattedMessage id="label.descriptionEn" />
-                        <Box sx={{ color: theme.palette.error.main }}>&nbsp;*</Box>
-                      </Box>
-                    }
-                  />
-                  <RHFTextField
-                    name="descriptionRu"
-                    size="small"
-                    multiline
-                    label={
-                      <Box sx={{ display: 'flex' }}>
-                        <FormattedMessage id="label.descriptionRu" />
-                        <Box sx={{ color: theme.palette.error.main }}>&nbsp;*</Box>
-                      </Box>
-                    }
-                  />
-                </Stack>
               </Grid>
             </Grid>
           </Box>
