@@ -153,7 +153,7 @@ const Suporters = ({ handleError403 }) => {
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            <FormattedMessage id="label.supporter" />
+            <FormattedMessage id="label.imageBackgroundName" />
           </Typography>
           <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />} onClick={handleOpenAddModal}>
             <FormattedMessage id="button.create" />
@@ -229,7 +229,7 @@ const Suporters = ({ handleError403 }) => {
               </Table>
             </TableContainer>
           </Scrollbar>
-          <TablePagination
+          {/* <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
             page={pageNumber}
@@ -237,7 +237,7 @@ const Suporters = ({ handleError403 }) => {
             rowsPerPage={pageSize}
             onPageChange={handlePageNumberChange}
             onRowsPerPageChange={handlePageSizeChange}
-          />
+          /> */}
         </Card>
         {editModalOpen && (
           <SupporterEditModal open={editModalOpen} close={handleCloseEditModal} supporter={selectedData} />
