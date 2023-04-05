@@ -21,9 +21,9 @@ export const getUserInfoAPI = async () => {
 };
 
 // -----------CATEGORY APIS-----------
-export const getCategoriesAPI = async (pageSize, pageNumber, keyword = '') => {
+export const getCategoriesAPI = async () => {
   return axios.get(
-    `${process.env.REACT_APP_API_URL}/categories/admin?pageSize=${pageSize}&pageNumber=${pageNumber}&keyword=${keyword}`
+    `${process.env.REACT_APP_API_URL}/admin/brands`
   );
 };
 
@@ -164,8 +164,8 @@ export const updateProductAPI = async (productId, data) => {
 };
 
 // -----------SUBSCRIBE APIS-----------
-export const getSubscribesAPI = async (pageSize, pageNumber) => {
-  return axios.get(`${process.env.REACT_APP_API_URL}/subscribers?pageSize=${pageSize}&pageNumber=${pageNumber}`);
+export const getSubscribesAPI = async () => {
+  return axios.get(`${process.env.REACT_APP_API_URL}/admin/subscribers`);
 };
 
 // -----------NOTIFICATION APIS-----------
@@ -213,9 +213,9 @@ export const putUploadDoneAPI = async (fileId) => {
 };
 
 // -----------COVER APIS-----------
-export const getCoversAPI = async (pageSize, pageNumber, keyword = '') => {
+export const getCoversAPI = async () => {
   return axios.get(
-    `${process.env.REACT_APP_API_URL}/covers/admin?pageSize=${pageSize}&pageNumber=${pageNumber}&keyword=${keyword}`
+    `${process.env.REACT_APP_API_URL}/slidebarhome`
   );
 };
 
