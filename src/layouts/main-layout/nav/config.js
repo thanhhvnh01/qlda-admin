@@ -20,10 +20,6 @@ const navConfig = [
         path: '/covers',
       },
       {
-        title: 'Đơn hàng',
-        path: '/subscribers',
-      },
-      {
         title: 'Người đăng ký',
         path: '/subscribers',
       },

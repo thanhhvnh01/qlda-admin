@@ -50,12 +50,12 @@ const Covers = ({ handleError403 }) => {
   const { enqueueSnackbar } = useSnackbar();
   const intl = useIntl();
 
-  const fetchData = async (pageSize, pageNumber, keyword) => {
+  const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await getCoversAPI(pageSize, pageNumber, keyword);
-      setData(response.data.pageData);
-      setTotalRows(response.data.paging.totalItem);
+      const response = await getCoversAPI();
+      setData(response.data);
+      // setTotalRows(response.data.paging.totalItem);
     } catch (error) {
       enqueueSnackbar(<FormattedMessage id={getErrorMessage(error)} defaultMessage={getErrorMessage(error)} />, {
         variant: 'error',
@@ -150,7 +150,7 @@ const Covers = ({ handleError403 }) => {
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            <FormattedMessage id="label.supporter" />
+            <FormattedMessage id="label.imageBackground" />
           </Typography>
           <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />} onClick={handleOpenAddModal}>
             <FormattedMessage id="button.create" />
@@ -183,16 +183,12 @@ const Covers = ({ handleError403 }) => {
                         <TableCell align="left">
                           <Box>
                             <Typography sx={{ mt: 2, ml: 2 }} height="25px" variant="subtitle2" noWrap>
-                              {item.coverName}
+                              {item.imgBackGroundName}
                             </Typography>
                           </Box>
                         </TableCell>
                         <TableCell align="left">
-                          <Label color={item.isEnabled ? 'success' : 'error'}>
-                            {item.isEnabled
-                              ? intl.formatMessage({ id: 'label.active' })
-                              : intl.formatMessage({ id: 'label.inactive' })}
-                          </Label>
+                          <Label color={'success'}>{intl.formatMessage({ id: 'label.active' })}</Label>
                         </TableCell>
                         <TableCell align="right">
                           <CoverMoreActions
@@ -211,7 +207,7 @@ const Covers = ({ handleError403 }) => {
               </Table>
             </TableContainer>
           </Scrollbar>
-          <TablePagination
+          {/* <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
             page={pageNumber}
@@ -219,7 +215,7 @@ const Covers = ({ handleError403 }) => {
             rowsPerPage={pageSize}
             onPageChange={handlePageNumberChange}
             onRowsPerPageChange={handlePageSizeChange}
-          />
+          /> */}
         </Card>
         {editModalOpen && <CoverEditModal open={editModalOpen} close={handleCloseEditModal} cover={selectedData} />}
       </Container>

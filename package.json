@@ -44,6 +44,7 @@
     "change-case": "4.1.2",
     "classnames": "^2.3.2",
     "date-fns": "2.29.3",
+    "dotenv": "^16.0.3",
     "framer-motion": "4.1.17",
     "history": "5.3.0",
     "lodash": "4.17.21",

@@ -37,12 +37,12 @@ const Subscribers = ({ handleError403 }) => {
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const fetchData = async (pageSize, pageNumber) => {
+  const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await getSubscribesAPI(pageSize, pageNumber);
-      setData(response.data.pageData);
-      setTotalRows(response.data.paging.totalItem);
+      const response = await getSubscribesAPI();
+      setData(response.data);
+      // setTotalRows(response.data.paging.totalItem);
     } catch (error) {
       enqueueSnackbar(<FormattedMessage id={getErrorMessage(error)} defaultMessage={getErrorMessage(error)} />, {
         variant: 'error',
@@ -85,7 +85,7 @@ const Subscribers = ({ handleError403 }) => {
                 <TableBody>
                   {data?.map((item, index) => {
                     return (
-                      <TableRow key={item.contactId} hover>
+                      <TableRow key={index} hover>
                         <TableCell padding="normal" align="center">
                           <Box>
                             <Typography>{pageNumber * pageSize + index + 1}</Typography>
@@ -101,7 +101,7 @@ const Subscribers = ({ handleError403 }) => {
                         <TableCell align="left">
                           <Box>
                             <Typography variant="subtitle2" noWrap>
-                              {format(item.createAtUnix, 'hh:mm | dd/MM/yyyy')}
+                              {item.timeStamp}
                             </Typography>
                           </Box>
                         </TableCell>
@@ -112,7 +112,7 @@ const Subscribers = ({ handleError403 }) => {
               </Table>
             </TableContainer>
           </Scrollbar>
-          <TablePagination
+          {/* <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
             page={pageNumber}
@@ -120,7 +120,7 @@ const Subscribers = ({ handleError403 }) => {
             rowsPerPage={pageSize}
             onPageChange={handlePageNumberChange}
             onRowsPerPageChange={handlePageSizeChange}
-          />
+          /> */}
         </Card>
       </Container>
     </>

@@ -58,6 +58,8 @@
   "label.descriptionEn": "Mô tả (tiếng Anh)",
   "label.descriptionRu": "Mô tả (tiếng Nga)",
   "label.coverName": "Tên ảnh bìa",
+  "label.imageBackground": "Ảnh bìa",
+  "label.productCategory": "Hãng Sản phẩm",
 
   "/* button */": "button text",
   "button.signIn": "Đăng nhập",

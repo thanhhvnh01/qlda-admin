@@ -15,7 +15,6 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TablePagination,
   TableRow,
   Typography,
 } from '@mui/material';
@@ -50,12 +49,12 @@ const Categories = ({ handleError403 }) => {
   const { enqueueSnackbar } = useSnackbar();
   const intl = useIntl();
 
-  const fetchData = async (pageSize, pageNumber, keyword) => {
+  const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await getCategoriesAPI(pageSize, pageNumber, keyword);
-      setData(response.data.pageData);
-      setTotalRows(response.data.paging.totalItem);
+      const response = await getCategoriesAPI();
+      setData(response.data);
+      // setTotalRows(response.data.paging.totalItem);
     } catch (error) {
       enqueueSnackbar(<FormattedMessage id={getErrorMessage(error)} defaultMessage={getErrorMessage(error)} />, {
         variant: 'error',
@@ -150,7 +149,7 @@ const Categories = ({ handleError403 }) => {
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            <FormattedMessage id="label.category" />
+            <FormattedMessage id="label.productType" />
           </Typography>
           <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />} onClick={handleOpenAddModal}>
             <FormattedMessage id="button.create" />
@@ -170,11 +169,11 @@ const Categories = ({ handleError403 }) => {
           <Scrollbar>
             <TableContainer>
               <Table>
-                <TableHeader headLabel={TABLE_HEAD} rowCount={data.length} />
+                <TableHeader headLabel={TABLE_HEAD} />
                 <TableBody>
                   {data?.map((item, index) => {
                     return (
-                      <TableRow key={item.categoryId} hover>
+                      <TableRow key={index} hover>
                         <TableCell padding="normal" align="center">
                           <Box>
                             <Typography>{pageNumber * pageSize + index + 1}</Typography>
@@ -183,23 +182,12 @@ const Categories = ({ handleError403 }) => {
                         <TableCell align="left">
                           <Box>
                             <Typography variant="subtitle2" noWrap>
-                              {item.categoryNameEn}
+                              {item.brandName}
                             </Typography>
                           </Box>
                         </TableCell>
                         <TableCell align="left">
-                          <Box>
-                            <Typography variant="subtitle3" noWrap>
-                              {item.categoryNameRu}
-                            </Typography>
-                          </Box>
-                        </TableCell>
-                        <TableCell align="left">
-                          <Label color={item.isEnabled ? 'success' : 'error'}>
-                            {item.isEnabled
-                              ? intl.formatMessage({ id: 'label.active' })
-                              : intl.formatMessage({ id: 'label.inactive' })}
-                          </Label>
+                          <Label color={'success'}>{intl.formatMessage({ id: 'label.active' })}</Label>
                         </TableCell>
                         <TableCell align="right">
                           <CategoryMoreActions
@@ -218,15 +206,6 @@ const Categories = ({ handleError403 }) => {
               </Table>
             </TableContainer>
           </Scrollbar>
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            page={pageNumber}
-            count={totalRows}
-            rowsPerPage={pageSize}
-            onPageChange={handlePageNumberChange}
-            onRowsPerPageChange={handlePageSizeChange}
-          />
         </Card>
         {editModalOpen && (
           <CategoryEditModal open={editModalOpen} close={handleCloseEditModal} category={selectedData} />

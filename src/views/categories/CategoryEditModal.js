@@ -93,7 +93,7 @@ const CategoryEditModal = ({ open, close, category }) => {
       <DialogTitle>
         {!!category
           ? intl.formatMessage({ id: 'label.updateCategory' })
-          : intl.formatMessage({ id: 'label.createCategory' })}
+          : intl.formatMessage({ id: 'label.productType' })}
       </DialogTitle>
       <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
         <Box sx={{ px: 5 }}>
@@ -103,19 +103,7 @@ const CategoryEditModal = ({ open, close, category }) => {
               size="small"
               label={
                 <Box sx={{ display: 'flex' }}>
-                  <FormattedMessage id="label.nameEn" />
-                  <Box sx={{ color: theme.palette.error.main }}>&nbsp;*</Box>
-                </Box>
-              }
-            />
-          </Box>
-          <Box>
-            <RHFTextField
-              name="categoryNameRu"
-              size="small"
-              label={
-                <Box sx={{ display: 'flex' }}>
-                  <FormattedMessage id="label.nameRu" />
+                  <FormattedMessage id="label.productType" />
                   <Box sx={{ color: theme.palette.error.main }}>&nbsp;*</Box>
                 </Box>
               }
